@@ -1,0 +1,168 @@
+<!doctype html>
+<html>
+<head>
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<title>Сложение волн</title>
+	<link rel="stylesheet" href="css/reset.css" type="text/css">
+	<link rel="stylesheet" href="css/styles.css" type="text/css">
+    
+    <script type="text/javascript" src="animation.js"></script>
+     <script>
+
+    function Draw(phi) {
+        var canvas = document.getElementById('canv');
+        canvas.height = 600;
+        canvas.width = 600; 
+
+        var context = canvas.getContext('2d');
+        context.strokeStyle="#c0392b";
+
+        context.save();
+        context.setTransform(1, 0, 0, 1, 0, 0);
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        context.restore();
+
+        var t = 0;
+        var dt = 0.01;
+        var Pi=Math.PI;
+        var X = 0;
+        var Y = 0;
+
+        var A = document.Parametr.A.value;
+        var B = document.Parametr.B.value;
+        var w1 = document.Parametr.Omega1.value;
+        var w2 = document.Parametr.Omega2.value;
+        var fi = document.Parametr.Phi.value;
+        fi = parseFloat(phi);
+
+        context.beginPath();
+
+        for(t=0; t<(w1+w2); t+=dt ) 
+        {
+            X=A*Math.cos(w1*t);
+            Y=B*Math.cos(w2*t+fi);
+
+            context.lineTo((500+ X)/(200/112.7),(1000+ Y)/(200/60)); 
+        }
+
+        context.scale(0.3,1)
+        context.stroke();
+        }
+
+        function Rotate() {
+            var fi = parseFloat(document.Parametr.Phi.value);
+            Draw(fi);
+            fi += 0.01;
+            document.Parametr.Phi.value = fi.toFixed(2);
+            
+            }
+
+        function checkbox() {
+            var da = document.getElementById('da');
+            if(da.innerHTML == "Да") { 
+                da.innerHTML = da.innerHTML.replace(/Да/,'Нет');
+            }
+            else {
+                da.innerHTML = da.innerHTML.replace(/Нет/,'Да');
+            }
+        }
+        function checker() {    
+            var da = document.getElementById('da');
+            if(da.innerHTML == "Да") {              
+                update = true;
+            }
+            else {
+                update = false;
+            }
+                
+            return update;
+            }
+
+        
+        function start() {
+            var button = document.Parametr.button.value;
+            if(button == "Начать") {
+
+                var A = document.Parametr.A.value;
+                var B = document.Parametr.B.value;
+                var w1 = document.Parametr.Omega1.value;
+                var w2 = document.Parametr.Omega2.value;
+                var fi = document.Parametr.Phi.value;
+                if(A == '')  document.Parametr.A.value = 200;
+                if(B == '')  document.Parametr.B.value = 200;
+                if(w1 == '') document.Parametr.Omega1.value = 3;
+                if(w2 == '') document.Parametr.Omega2.value = 5;
+                if(fi == '') document.Parametr.Phi.value = 0;
+                
+                if(checker() == true) {
+            
+                    counter = setInterval(Rotate,20);
+                }
+                else {
+                    Draw(fi)
+                }
+                document.Parametr.button.value = "Остановить"
+            }
+            else {
+                 document.Parametr.button.value = "Начать"
+                 clearInterval(counter);
+            }
+
+        }    
+     </script>
+	
+	<!--[if lt IE 9]>
+	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+</head>
+    
+<body>
+    <section class="left">
+        <nav id="nav">
+        <ul>
+            <li>ИЗМЕРЕНИЯ</li>
+            <li>ТЕОРИЯ</li>
+            <li>КОД</li>
+        </ul>
+    </nav>
+   <canvas id="canv">&nbsp;</canvas>
+
+   
+
+    </section>
+    
+    <section class="right">
+
+    <h1>Сложение взаимо-перпендикулярных гармонических колебаний</h1>
+    <h2>Выполнила: Валетова Р.Р / гр. P3136</h2>
+
+    <p class="info">
+    Практическое применение сложение перпендикулярных колебаний мы можем встретить в таких отраслях, как электротехника и метрология. К примеру, сложение колебаний используется в утройстве осциллографа для расчёта угла сдвига фаз дву электрических колебаний.
+    </p>
+
+    
+    <span class="differentation ">Для сложения волн введите параметры каждой:</span>
+    <h4>Параметр t определяется динамически самой программой</h4>
+    <form name ="Parametr">
+    <span class="formula">X = A • cos(ω • t) </span><br/>
+    <span>X = </span>
+    <input type="text" class="readParam"  maxlength="6" placeholder="A" name="A" required pattern="[0-9]{3}">
+    • cos(
+    <input type="text" class="readParam"  maxlength="6" placeholder="ω1" name="Omega1" required pattern="[0-9]{1}"> • t)
+    <p>&nbsp;</p>
+    <span class="formula">Y = B • cos(ω • t + φ) </span><br/>
+    <span>Y = </span>
+    <input type="text" class="readParam"  maxlength="6" placeholder="B" name="B" required pattern="[0-9]{3}">&nbsp;•&nbsp;cos(
+    <input type="text" class="readParam"  maxlength="6" placeholder="ω2" name="Omega2" required pattern="[0-9]{1}"> • t + 
+    <input type="text" class="readParam"  maxlength="6" placeholder="φ" name="Phi" required >)<p>&nbsp;</p>
+    <div onclick="checkbox()" class='link'><span class="differentation ">Использовать динамическое обновление φ?  </span><span id="da">Да</span></div>
+    <h4 onclick="setInterval">Если не указывать данные, будет использовано значение по умолчанию </h4>
+
+    <input type="button" name="button" name="button" onclick="start() " value="Начать"><img src="img/enter.png"  />
+    </form>
+    </section>
+    
+</body>
+</html>
+ 
