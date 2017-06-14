@@ -135,7 +135,7 @@ input[type="text"]:hover {
 .link:hover {
     cursor: pointer;
 }
-input[type="submit"] {
+input[type="button"] {
     border: none;
     background: #c0392b;
     width: 100px;
@@ -144,7 +144,7 @@ input[type="submit"] {
     color: white;
 }
 
-input[type="submit"]:hover{
+input[type="button"]:hover{
     box-shadow: 0 0 10px rgba(0,150,77,0.3);
 }
 

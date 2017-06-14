@@ -79,7 +79,12 @@
             return update;
             }
 
-        
+        function countDigits(n) {
+            for(var i = 0; n > 1; i++) {
+             n /= 10;
+            }
+            return i;
+        }
         function start() {
             var button = document.Parametr.button.value;
             if(button == "Начать") {
@@ -94,7 +99,11 @@
                 if(w1 == '') document.Parametr.Omega1.value = 3;
                 if(w2 == '') document.Parametr.Omega2.value = 5;
                 if(fi == '') document.Parametr.Phi.value = 0;
-                
+                if(countDigits(w1) > 1 or countDigits(w2) >1) {
+                    alert("При значении ω "+w1+" , где больше одной цифры, получается слишком большая нагрузка на ЦП");
+                    return 0;
+                }
+
                 if(checker() == true) {
             
                     counter = setInterval(Rotate,20);
@@ -144,7 +153,7 @@
     
     <span class="differentation ">Для сложения волн введите параметры каждой:</span>
     <h4>Параметр t определяется динамически самой программой</h4>
-    <form name ="Parametr" action="javascript:start()">
+    <form name ="Parametr">
     <span class="formula">X = A • cos(ω • t) </span><br/>
     <span>X = </span>
     <input type="text" class="readParam"  maxlength="6" placeholder="A" name="A" required pattern="[0-9]{3}">
@@ -159,7 +168,7 @@
     <div onclick="checkbox()" class='link'><span class="differentation ">Использовать динамическое обновление φ?  </span><span id="da">Да</span></div>
     <h4 onclick="setInterval">Если не указывать данные, будет использовано значение по умолчанию </h4>
 
-    <input type="submit" name="button" name="button" value="Начать"><img src="img/enter.png"  />
+    <input type="button" name="button" name="button" value="Начать"><img src="img/enter.png"  />
     </form>
     </section>
     
