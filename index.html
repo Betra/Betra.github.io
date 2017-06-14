@@ -6,8 +6,6 @@
 	<title>Сложение волн</title>
 	<link rel="stylesheet" href="css/reset.css" type="text/css">
 	<link rel="stylesheet" href="css/styles.css" type="text/css">
-    
-    <script type="text/javascript" src="animation.js"></script>
      <script>
 
     function Draw(phi) {
@@ -99,7 +97,7 @@
                 if(w1 == '') document.Parametr.Omega1.value = 3;
                 if(w2 == '') document.Parametr.Omega2.value = 5;
                 if(fi == '') document.Parametr.Phi.value = 0;
-                if(countDigits(w1) > 1 or countDigits(w2) >1) {
+                if((countDigits(w1)) > 1 or (countDigits(w2) >1)) {
                     alert("При значении ω "+w1+" , где больше одной цифры, получается слишком большая нагрузка на ЦП");
                     return 0;
                 }
@@ -168,7 +166,7 @@
     <div onclick="checkbox()" class='link'><span class="differentation ">Использовать динамическое обновление φ?  </span><span id="da">Да</span></div>
     <h4 onclick="setInterval">Если не указывать данные, будет использовано значение по умолчанию </h4>
 
-    <input type="button" name="button" name="button" value="Начать"><img src="img/enter.png"  />
+    <input type="button" name="button" name="button" onclick="start()" value="Начать"><img src="img/enter.png"  />
     </form>
     </section>
     
