@@ -48,10 +48,10 @@
 
         function changeCheckbox() {
             var checker = document.getElementById('checker').innerHTML;
-            if(checker== "Да") checker= da.replace(/Да/,'Нет');
+            if(checker== "Да") checker= checker.replace(/Да/,'Нет');
 
             else {
-                checker= da.replace(/Нет/,'Да');
+                checker= checker.replace(/Нет/,'Да');
                 clearInterval(counter);
             }
             ;
