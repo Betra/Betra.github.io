@@ -39,42 +39,35 @@
         context.stroke();
         }
 
-        function Rotate() {
-            var fi = parseFloat(document.Parametr.Phi.value);
+        function IncreasePhiAndDraw(A,B,w1,w2,fi) {
             Draw(fi);
             fi += 0.01;
             document.Parametr.Phi.value = fi.toFixed(2);
             
             }
 
-        function checkbox() {
-            var da = document.getElementById('da');
-            if(da.innerHTML == "Да") { 
-                da.innerHTML = da.innerHTML.replace(/Да/,'Нет');
-            }
+        function changeCheckbox() {
+            var da = document.getElementById('da').innerHTML;
+            if(da == "Да") {da = da.replace(/Да/,'Нет');
+
             else {
-                da.innerHTML = da.innerHTML.replace(/Нет/,'Да');
+                da = da.replace(/Нет/,'Да');
+                clearInterval(counter);
             }
+            ;
         }
-        function checker() {    
+        
+        function checkCheckbox() {    
             var da = document.getElementById('da');
-            if(da.innerHTML == "Да") {              
-                update = true;
-            }
-            else {
-                update = false;
-            }
-                
+
+            if(da.innerHTML == "Да") update = true;
+            else 					 update = false;
+
             return update;
             }
 
-        function countDigits(n) {
-            for(var i = 0; n > 1; i++) {
-             n /= 10;
-            }
-            return i;
-        }
-        function start() {
+
+        function Construct() {
             var button = document.Parametr.button.value;
             if(button == "Начать") {
 
@@ -83,32 +76,19 @@
                 var w1 = document.Parametr.Omega1.value;
                 var w2 = document.Parametr.Omega2.value;
                 var fi = document.Parametr.Phi.value;
+
                 if(A == '')  document.Parametr.A.value = 200;
                 if(B == '')  document.Parametr.B.value = 200;
                 if(w1 == '') document.Parametr.Omega1.value = 3;
                 if(w2 == '') document.Parametr.Omega2.value = 5;
                 if(fi == '') document.Parametr.Phi.value = 0;
                 
-                if(countDigits(w1) > 1) {
-                    alert("Слишком большая нагрузка на ЦП при двузначной ω \n ω = "+w1);
-                    return 0;
-                }
-                if(countDigits(w2) > 1) {
-                    alert("Слишком большая нагрузка на ЦП при двузначной ω \n ω = "+w2);
-                    return 0;
-                }
+				if(checkCheckbox()) acounter = setInterval(IncreasePhiAndDraw(A,B,w1,w2,fi),20);
+                else Draw();
 
-                
-
-                if(checker() == true) {
-            
-                    counter = setInterval(Rotate,20);
-                }
-                else {
-                    Draw(fi)
-                }
                 document.Parametr.button.value = "Остановить"
             }
+
             else {
                  document.Parametr.button.value = "Начать"
                  clearInterval(counter);
