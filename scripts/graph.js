@@ -47,21 +47,21 @@
             }
 
         function changeCheckbox() {
-            var da = document.getElementById('da').innerHTML;
-            if(da == "Да") {da = da.replace(/Да/,'Нет');
+            var checker = document.getElementById('checker').innerHTML;
+            if(checker== "Да") checker= da.replace(/Да/,'Нет');
 
             else {
-                da = da.replace(/Нет/,'Да');
+                checker= da.replace(/Нет/,'Да');
                 clearInterval(counter);
             }
             ;
         }
         
         function checkCheckbox() {    
-            var da = document.getElementById('da');
+            var checker = document.getElementById('checker').innerHTML;
 
-            if(da.innerHTML == "Да") update = true;
-            else 					 update = false;
+            if(checker == "Да") update = true;
+            else 				update = false;
 
             return update;
             }
