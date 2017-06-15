@@ -76,7 +76,9 @@
                 if(w2 == '') document.Parametr.Omega2.value = 5;
                 if(fi == '') document.Parametr.Phi.value = 0;
                 
-				if(checkCheckbox()) acounter = setInterval(IncreasePhiAndDraw(A,B,w1,w2,fi),20);
+
+                funct = IncreasePhiAndDraw(A,B,w1,w2,fi);
+				if(checkCheckbox()) acounter = setInterval(funct,20);
                 else Draw(A,B,w1,w2,fi);
 
                 document.Parametr.button.value = "Остановить"
