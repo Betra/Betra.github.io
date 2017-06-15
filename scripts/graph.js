@@ -17,6 +17,7 @@
         var Pi=Math.PI;
         var X = 0;
         var Y = 0;
+        fi = parseFloat(fi);
 
         context.beginPath();
         for(t=0; t<(w1+w2); t+=dt ) 
@@ -33,6 +34,7 @@
 
         function IncreasePhiAndDraw(A,B,w1,w2,fi) {
             Draw(A,B,w1,w2,fi);
+            fi = parseFloat(fi);
             fi += 0.01;
             document.Parametr.Phi.value = fi.toFixed(2);
             }
