@@ -1,5 +1,5 @@
 
-    function Draw(phi) {
+    function Draw(A,B,w1,w2,fi) {
         var canvas = document.getElementById('canv');
         canvas.height = 600;
         canvas.width = 600; 
@@ -18,15 +18,7 @@
         var X = 0;
         var Y = 0;
 
-        var A = document.Parametr.A.value;
-        var B = document.Parametr.B.value;
-        var w1 = document.Parametr.Omega1.value;
-        var w2 = document.Parametr.Omega2.value;
-        var fi = document.Parametr.Phi.value;
-        fi = parseFloat(phi);
-
         context.beginPath();
-
         for(t=0; t<(w1+w2); t+=dt ) 
         {
             X=A*Math.cos(w1*t);
@@ -40,10 +32,9 @@
         }
 
         function IncreasePhiAndDraw(A,B,w1,w2,fi) {
-            Draw(fi);
+            Draw(A,B,w1,w2,fi);
             fi += 0.01;
             document.Parametr.Phi.value = fi.toFixed(2);
-            
             }
 
         function changeCheckbox() {
@@ -84,7 +75,7 @@
                 if(fi == '') document.Parametr.Phi.value = 0;
                 
 				if(checkCheckbox()) acounter = setInterval(IncreasePhiAndDraw(A,B,w1,w2,fi),20);
-                else Draw();
+                else Draw(A,B,w1,w2,fi);
 
                 document.Parametr.button.value = "Остановить"
             }
