@@ -41,11 +41,11 @@
 
         function changeCheckbox() {
             var checker = document.getElementById('checker').innerHTML;
-            if(checker== "Да") checker= checker.replace(/Да/,'Нет');
+            if(checker == "Да") checker = checker.replace(/Да/,'Нет');
 
             else {
-                checker= checker.replace(/Нет/,'Да');
-                clearInterval(counter);
+                checker = checker.replace(/Нет/,'Да');
+                if(counter) clearInterval(counter);
             }
             ;
         }
