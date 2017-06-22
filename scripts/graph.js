@@ -30,7 +30,7 @@
             context.lineTo((500+ X)/(200/112.7),(1000+ Y)/(200/60)); 
         }
 
-        context.scale(0.3,1)
+        context.scale(0.3,3)
         context.stroke();
     }
 
