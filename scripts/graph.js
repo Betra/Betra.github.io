@@ -66,7 +66,7 @@
 
         else {
             da.innerHTML = da.innerHTML.replace(/Нет/,'Да');
-            if(disabled) counter = setInterval(IncreasePhiAndDraw,20);    
+               
             return 0;
         }
         
@@ -90,21 +90,23 @@
 
             var A = document.Parametr.A.value;
             var B = document.Parametr.B.value;
-           var w1 = document.Parametr.Omega1.value;
+            var w1 = document.Parametr.Omega1.value;
             var w2 = document.Parametr.Omega2.value;
             var fi = document.Parametr.Phi.value;
 
             if(A == '')  document.Parametr.A.value = 200;
             if(B == '')  document.Parametr.B.value = 200;
-            if(w1 == '') document.Parametr.Omega1.value = 3;
-            if(w2 == '') document.Parametr.Omega2.value = 5;
+            if(w1 == '') document.Parametr.Omega1.value = 1;
+            if(w2 == '') document.Parametr.Omega2.value = 2;
             if(fi == '') document.Parametr.Phi.value = 0;
     
                 
-			if(checkCheckbox()) counter = setInterval(IncreasePhiAndDraw,20);
+			if(checkCheckbox()) { 
+                counter = setInterval(IncreasePhiAndDraw,20);
+                document.Parametr.button.value = "Остановить"
+            }
             else Draw(A,B,w1,w2,fi);
-
-            document.Parametr.button.value = "Остановить"
+            
             }
 
         else {
