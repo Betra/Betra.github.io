@@ -1,5 +1,6 @@
 
     function Draw(A,B,w1,w2,fi) {
+        //Draws Lissagau figures
         var canvas = document.getElementById('canv');
         canvas.height = 600;
         canvas.width = 600; 
@@ -20,6 +21,7 @@
         fi = parseFloat(fi);
 
         context.beginPath();
+        
         for(t=0; t<(w1+w2); t+=dt ) 
         {
             X=A*Math.cos(w1*t);
@@ -30,78 +32,82 @@
 
         context.scale(0.3,1)
         context.stroke();
+    }
+
+    function IncreasePhiAndDraw() {
+        //Calls Draw() and animate it via increasing phi and calls Draw() again
+        var A = document.Parametr.A.value;
+        var B = document.Parametr.B.value;
+        var w1 = document.Parametr.Omega1.value;
+        var w2 = document.Parametr.Omega2.value;
+        var fi = document.Parametr.Phi.value
+        fi = parseFloat(fi);
+
+        Draw(A,B,w1,w2,fi);
+        fi += 0.01;
+        document.Parametr.Phi.value = fi.toFixed(2);
         }
 
-        function IncreasePhiAndDraw() {
+    function changeCheckbox() {
+        //Makes a string checkbox and check wether condition is the same
+        var da = document.getElementById('da');
+        
+        if(da.innerHTML == "Да") {
+            da.innerHTML = da.innerHTML.replace(/Да/,'Нет');
+            if(counter) { 
+                clearInterval(counter);
+                disabled = true;
+            }
+
+                return 1;
+        }
+
+        else {
+            da.innerHTML = da.innerHTML.replace(/Нет/,'Да');
+            if(disabled) counter = setInterval(IncreasePhiAndDraw,20);    
+            return 0;
+        }
+        
+    }
+        
+    function checkCheckbox() {    
+        //Checks wether user wants to animate figure or not
+        var da = document.getElementById('da');
+
+        if(da.innerHTML == "Да") update = true;
+        else update = false;
+        
+        return update;
+    }
+
+
+    function Construct() {
+        //Initialisation process: reads parametrs, checks radio and starts
+        var button = document.Parametr.button.value;
+        if(button == "Начать") {
 
             var A = document.Parametr.A.value;
             var B = document.Parametr.B.value;
-            var w1 = document.Parametr.Omega1.value;
+           var w1 = document.Parametr.Omega1.value;
             var w2 = document.Parametr.Omega2.value;
-            var fi = document.Parametr.Phi.value
-            fi = parseFloat(fi);
+            var fi = document.Parametr.Phi.value;
 
-            Draw(A,B,w1,w2,fi);
-            fi += 0.01;
-            document.Parametr.Phi.value = fi.toFixed(2);
-            }
-
-        function changeCheckbox() {
-            var da = document.getElementById('da');
-            
-            if(da.innerHTML == "Да") {
-                da.innerHTML = da.innerHTML.replace(/Да/,'Нет');
-                if(counter) { 
-                    clearInterval(counter);
-                    disabled = true;
-                }
-                return 1;
-            }
-            else {
-                da.innerHTML = da.innerHTML.replace(/Нет/,'Да');
-                if(disabled) counter = setInterval(IncreasePhiAndDraw,20);
-                
-                return 0;
-            }
-            ;
-        }
-        
-        function checkCheckbox() {    
-            var da = document.getElementById('da');
-
-            if(da.innerHTML == "Да") update = true;
-            else update = false;
-
-            return update;
-            }
-
-
-        function Construct() {
-            var button = document.Parametr.button.value;
-            if(button == "Начать") {
-
-                var A = document.Parametr.A.value;
-                var B = document.Parametr.B.value;
-                var w1 = document.Parametr.Omega1.value;
-                var w2 = document.Parametr.Omega2.value;
-                var fi = document.Parametr.Phi.value;
-
-                if(A == '')  document.Parametr.A.value = 200;
-                if(B == '')  document.Parametr.B.value = 200;
-                if(w1 == '') document.Parametr.Omega1.value = 3;
-                if(w2 == '') document.Parametr.Omega2.value = 5;
-                if(fi == '') document.Parametr.Phi.value = 0;
+            if(A == '')  document.Parametr.A.value = 200;
+            if(B == '')  document.Parametr.B.value = 200;
+            if(w1 == '') document.Parametr.Omega1.value = 3;
+            if(w2 == '') document.Parametr.Omega2.value = 5;
+            if(fi == '') document.Parametr.Phi.value = 0;
     
                 
-				if(checkCheckbox()) counter = setInterval(IncreasePhiAndDraw,20);
-                else Draw(A,B,w1,w2,fi);
+			if(checkCheckbox()) counter = setInterval(IncreasePhiAndDraw,20);
+            else Draw(A,B,w1,w2,fi);
 
-                document.Parametr.button.value = "Остановить"
+            document.Parametr.button.value = "Остановить"
             }
 
-            else {
-                 document.Parametr.button.value = "Начать"
-                 clearInterval(counter);
-            }
+        else {
+             document.Parametr.button.value = "Начать"
+             clearInterval(counter);
+        }
 
         }    
