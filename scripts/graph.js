@@ -56,8 +56,8 @@
             da.innerHTML = da.innerHTML.replace(/Да/,'Нет');
 
             if(counter) { 
-                document.Parametr.button.value = "Начать"
                 clearInterval(counter);
+                document.Parametr.button.value = "Начать"
                 disabled = true;
             }
 
